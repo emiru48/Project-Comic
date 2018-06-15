@@ -17,7 +17,17 @@ export class MarvelProvider {
   }
 
   getHeroes() {
-    this.http.get(`${this.apiUrl}/characters?apikey=${this.apiKey}`)
-      .subscribe(response => console.log(response));
+    return this.http.get(`${this.apiUrl}/characters?apikey=${this.apiKey}`);
+  }
+
+  getHero(id: number) {
+    return this.http.get(`${this.apiUrl}/characters/${id}?apikey=${this.apiKey}`);
+  }
+
+  searchHeroes(match: string) {
+    const encoded: string = encodeURI(match);
+    return this.http.get(`${this.apiUrl}
+/characters?nameStartsWith=${encoded}
+&apikey=${this.apiKey}`);
   }
 }

@@ -9,11 +9,13 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MarvelProvider } from '../providers/marvel/marvel';
 import { DcProvider } from '../providers/dc/dc';
+import { MisTabsPage } from '../pages/mis-tabs/mis-tabs';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    MisTabsPage,
+    
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,7 @@ import { DcProvider } from '../providers/dc/dc';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    MisTabsPage,
   ],
   providers: [
     StatusBar,

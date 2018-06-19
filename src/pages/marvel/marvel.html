@@ -6,18 +6,11 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Marvel</ion-title>
-  </ion-navbar>
+  <ion-toolbar color="danger">
+    <ion-searchbar [debounce]="500" placeholder="Buscar personaje"></ion-searchbar>
+  </ion-toolbar>
 
 </ion-header>
 
-
-<ion-content padding>
-  <ion-searchbar
-    [(ngModel)]="myInput"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
+<ion-content>
 </ion-content>

@@ -17,6 +17,7 @@ import { MarvelProvider } from '../../providers/marvel/marvel';
 })
 export class MarvelPage {
 
+  sampleHeroes = [];
   heroes = [];
 
   constructor(
@@ -34,12 +35,20 @@ export class MarvelPage {
         this.heroes = response.data.results;
       });
     } else {
-      this.heroes = [];
+      this.heroes = this.sampleHeroes;
     }
+  }
+
+  initialHeroes() {
+    this.marvel.getHeroes().subscribe((response: any) => {
+      this.sampleHeroes = response.data.results;
+      this.heroes = this.sampleHeroes;
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MarvelPage');
+    this.initialHeroes();
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 import { MarvelProvider } from '../../providers/marvel/marvel';
 
@@ -26,11 +27,17 @@ export class DetallesHeroePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private marvel: MarvelProvider,
+    public loadingCtrl: LoadingController,
   ) {
     this.heroId = this.navParams.get('id');
     this.heroName = this.navParams.get('name');
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando personaje...'
+    });
+    loading.present();
     this.marvel.getHero(this.heroId).subscribe((response: any) => {
       this.hero = response.data.results[0];
+      loading.dismiss();
     });
   }
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 import { MarvelProvider } from '../../providers/marvel/marvel';
 
@@ -24,6 +25,7 @@ export class MarvelPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private marvel: MarvelProvider,
+    public loadingCtrl: LoadingController,
   ) {
   }
 
@@ -31,8 +33,13 @@ export class MarvelPage {
     const text = ev.target.value;
 
     if (text && text.trim() != '') {
+      let loading = this.loadingCtrl.create({
+        content: 'Buscando personajes...'
+      });
+      loading.present();
       this.marvel.searchHeroes(text).subscribe((response: any) => {
         this.heroes = response.data.results;
+        loading.dismiss();
       });
     } else {
       this.heroes = this.sampleHeroes;
@@ -47,9 +54,14 @@ export class MarvelPage {
   }
 
   initialHeroes() {
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando personajes de ejemplo...'
+    });
+    loading.present();
     this.marvel.getHeroes().subscribe((response: any) => {
       this.sampleHeroes = response.data.results;
       this.heroes = this.sampleHeroes;
+      loading.dismiss();
     });
   }
 

@@ -39,6 +39,13 @@ export class MarvelPage {
     }
   }
 
+  viewHero(hero: any) {
+    this.navCtrl.push('DetallesHeroePage', {
+      id: hero.id,
+      name: hero.name,
+    });
+  }
+
   initialHeroes() {
     this.marvel.getHeroes().subscribe((response: any) => {
       this.sampleHeroes = response.data.results;

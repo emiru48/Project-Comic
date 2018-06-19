@@ -14,7 +14,7 @@ export class HomePage {
     private marvel: MarvelProvider,
   ) {
     this.marvel.searchHeroes('Sp')
-      .subscribe(response => console.log(response));
+      .subscribe((response: any) => console.log(response));
   }
 
 }

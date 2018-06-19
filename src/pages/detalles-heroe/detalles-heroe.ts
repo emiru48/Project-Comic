@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { MarvelProvider } from '../../providers/marvel/marvel';
 
@@ -28,6 +29,7 @@ export class DetallesHeroePage {
     public navParams: NavParams,
     private marvel: MarvelProvider,
     public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
   ) {
     this.heroId = this.navParams.get('id');
     this.heroName = this.navParams.get('name');
@@ -38,6 +40,12 @@ export class DetallesHeroePage {
     this.marvel.getHero(this.heroId).subscribe((response: any) => {
       this.hero = response.data.results[0];
       loading.dismiss();
+    }, (_) => {
+      let toast = this.toastCtrl.create({
+        message: 'Error al cargar personaje',
+        duration: 5000,
+      });
+      toast.present();
     });
   }
 

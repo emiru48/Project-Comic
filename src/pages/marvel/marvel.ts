@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { MarvelProvider } from '../../providers/marvel/marvel';
 
@@ -26,6 +27,7 @@ export class MarvelPage {
     public navParams: NavParams,
     private marvel: MarvelProvider,
     public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
   ) {
   }
 
@@ -40,6 +42,12 @@ export class MarvelPage {
       this.marvel.searchHeroes(text).subscribe((response: any) => {
         this.heroes = response.data.results;
         loading.dismiss();
+      }, (_) => {
+        let toast = this.toastCtrl.create({
+          message: 'Error al buscar personajes',
+          duration: 5000,
+        });
+        toast.present();
       });
     } else {
       this.heroes = this.sampleHeroes;
@@ -62,6 +70,12 @@ export class MarvelPage {
       this.sampleHeroes = response.data.results;
       this.heroes = this.sampleHeroes;
       loading.dismiss();
+    }, (_) => {
+      let toast = this.toastCtrl.create({
+        message: 'Error al cargar personajes de ejemplo',
+        duration: 5000,
+      });
+      toast.present();
     });
   }
 

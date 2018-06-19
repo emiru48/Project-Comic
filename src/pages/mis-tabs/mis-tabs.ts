@@ -17,7 +17,6 @@ export class MisTabsPage {
 
   inicioRoot = 'InicioPage'
   marvelRoot = 'MarvelPage'
-  dcRoot = 'DcPage'
   aboutRoot = 'AboutPage'
 
 
